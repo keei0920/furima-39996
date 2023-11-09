@@ -2,40 +2,38 @@
 
 ## users テーブル
 
-| Column             | Type   | Options     |
-| ------------------ | ------ | ----------- |
-| nickname           | string | null: false |
-| email              | string | null: false |
-| encrypted_password | string | null: false |
-| name1              | string | null: false |
-| name2              | string | null: false |
-| name3              | string | null: false |
-| name4              | string | null: false |
-| birth_year         | string | null: false |
-| birth_month        | string | null: false |
-| birth-date         | string | null: false |
+| Column             | Type   | Options                   |
+| ------------------ | ------ | ------------------------- |
+| nickname           | string | null: false               |
+| email              | string | null: false, unique: true |
+| encrypted_password | string | null: false               |
+| last_name          | string | null: false               |
+| first_name         | string | null: false               |
+| last_name_kana     | string | null: false               |
+| first_name_kana    | string | null: false               |
+| birth_day          | date   | null: false               |
 
 
 ### Association
 
 - has_many :items
 - has_many :comments
-- has_one  :orders
+- has_many :orders
+
 
 ## items テーブル
 
-| Column             | Type       | Options                        |
-| ------------------ | ---------- | -----------------------------  |
-| item_image         | string     | null: false                    |
-| item_name          | string     | null: false                    |
-| content            | string     | null: false                    |
-| category           | integer    | null: false                    |
-| item_condition     | integer    | null: false                    |
-| delivery_condition | integer    | null: false                    |
-| from_area          | integer    | null: false                    |
-| reach_date         | integer    | null: false                    |
-| price              | integer    | null: false                    |
-| user_id            | references | null: false, foreign_key: true |
+| Column                | Type       | Options                        |
+| --------------------- | ---------- | -----------------------------  |
+| item_name             | string     | null: false                    |
+| detail                | text       | null: false                    |
+| category_id           | integer    | null: false                    |
+| item_condition_id     | integer    | null: false                    |
+| delivery_condition_id | integer    | null: false                    |
+| prefecture_id         | integer    | null: false                    |
+| reach_date_id         | integer    | null: false                    |
+| price                 | integer    | null: false                    |
+| user                  | references | null: false, foreign_key: true |
 
 
 ### Association
@@ -44,34 +42,48 @@
 - has_many   :comments
 - has_one    :orders
 
+
 ## orders テーブル
 
 | Column             | Type       | Options                        |
 | ------------------ | ---------- | ------------------------------ |
-| post_number        | integer    | null: false                    |
-| prefectures        | string     | null: false                    |
-| municipalities     | string     | null: false                    |
-| street_address     | string     | null: false                    |
-| item_condition     | string     | null: false                    |
-| building_name      | string     | null: false                    |
-| tel_number         | string     | null: false                    |
-| reach_date         | string     | null: false                    |
-| user_id            | references | null: false, foreign_key: true |
-| item_id            | references | null: false, foreign_key: true |
+| user               | references | null: false, foreign_key: true |
+| item               | references | null: false, foreign_key: true |
 
 
 ### Association
 
 - belongs_to :user
 - belongs_to :item
+- has_one :address
+
+
+## addresses テーブル
+
+| Column             | Type       | Options                        |
+| ------------------ | ---------- | ------------------------------ |
+| post_number        | integer    | null: false                    |
+| prefecture_id      | integer    | null: false                    |
+| municipality       | string     | null: false                    |
+| street_address     | string     | null: false                    |
+| building_name      | string     |                                |
+| tel_number         | string     | null: false                    |
+| order              | references | null: false, foreign_key: true |
+
+
+### Association
+
+- belongs_to :order
+
+
 
 ## comments テーブル
 
 | Column  | Type       | Options                        |
 | ------- | ---------- | ------------------------------ |
 | content | string     |                                |
-| user_id | references | null: false, foreign_key: true |
-| item_id | references | null: false, foreign_key: true |
+| user    | references | null: false, foreign_key: true |
+| item    | references | null: false, foreign_key: true |
 
 ### Association
 
