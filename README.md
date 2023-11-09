@@ -40,7 +40,7 @@
 
 - belongs_to :user
 - has_many   :comments
-- has_one    :orders
+- has_one    :order
 
 
 ## orders テーブル
@@ -62,7 +62,7 @@
 
 | Column             | Type       | Options                        |
 | ------------------ | ---------- | ------------------------------ |
-| post_number        | integer    | null: false                    |
+| post_number        | string     | null: false                    |
 | prefecture_id      | integer    | null: false                    |
 | municipality       | string     | null: false                    |
 | street_address     | string     | null: false                    |
