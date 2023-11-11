@@ -4,7 +4,14 @@ RSpec.describe Item, type: :model do
   before do
     @item = FactoryBot.build(:item)
   end
-  describe '商品の出品' do
+
+  describe '商品の出品ができる' do
+    it '必要な情報が適切に入力されれば出品できる' do
+      expect(@item).to be_valid
+    end
+  end
+
+  describe '商品の出品ができない' do
     it '画像が添付されていないと出品できない' do
       @item.image = nil
       @item.valid?
@@ -21,27 +28,27 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include "Detail can't be blank"
     end
     it 'カテゴリーの情報がないと出品できない' do
-      @item.category_id = ""
+      @item.category_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include "Category can't be blank"
     end
     it '商品の状態の情報がないと出品できない' do
-      @item.item_condition_id = ""
+      @item.item_condition_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include "Item condition can't be blank"
     end
     it '配送料の負担の情報がないと出品できない' do
-      @item.delivery_condition_id = ""
+      @item.delivery_condition_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include "Delivery condition can't be blank"
     end
     it '発送元の地域の情報がないと出品できない' do
-      @item.prefecture_id = ""
+      @item.prefecture_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include "Prefecture can't be blank"
     end
     it '発送までの日数の情報がないと出品できない' do
-      @item.reach_date_id = ""
+      @item.reach_date_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include "Reach date can't be blank"
     end
@@ -64,6 +71,12 @@ RSpec.describe Item, type: :model do
       @item.price = "abc345"
       @item.valid?
       expect(@item.errors.full_messages).to include "Price is not a number"
+    end
+
+    it 'userが紐づいていないと出品できない' do
+      @item.user = nil
+      @item.valid?
+      expect(@item.errors.full_messages).to include "User must exist"
     end
   end
 end
