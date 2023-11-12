@@ -127,8 +127,9 @@
       新規投稿商品
     </div>
     <ul class='item-lists'>
-
+      
       <% @items.each do |item| %>
+      <%= link_to(item_path(item.id)) do %>
       <li class='list'>
         <div class='item-img-content'>
           <%= image_tag item.image, class: "item-img" %>
@@ -153,7 +154,8 @@
           </div>
         </div>
       </li>
-        <% end %>
+      <% end %>
+      <% end %>
 
       <% unless Item.exists?%>
        <li class='list'>
