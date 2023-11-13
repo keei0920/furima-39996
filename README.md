@@ -18,7 +18,7 @@
 
 - has_many :items
 - has_many :comments
-- has_many :orders
+- has_many :buyers
 
 
 ## items テーブル
@@ -40,10 +40,10 @@
 
 - belongs_to :user
 - has_many   :comments
-- has_one    :order
+- has_one    :buyer
 
 
-## orders テーブル
+## buyers テーブル
 
 | Column             | Type       | Options                        |
 | ------------------ | ---------- | ------------------------------ |
@@ -55,10 +55,10 @@
 
 - belongs_to :user
 - belongs_to :item
-- has_one :address
+- has_one :order
 
 
-## addresses テーブル
+## orders テーブル
 
 | Column             | Type       | Options                        |
 | ------------------ | ---------- | ------------------------------ |
@@ -68,12 +68,12 @@
 | street_address     | string     | null: false                    |
 | building_name      | string     |                                |
 | tel_number         | string     | null: false                    |
-| order              | references | null: false, foreign_key: true |
+| buyer              | references | null: false, foreign_key: true |
 
 
 ### Association
 
-- belongs_to :order
+- belongs_to :buyer
 
 
 
