@@ -15,4 +15,5 @@ class User < ApplicationRecord
   validates :birth_day, presence: true
 
   has_many :items, dependent: :destroy
+  has_many    :orders
 end
