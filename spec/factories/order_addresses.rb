@@ -6,8 +6,6 @@ FactoryBot.define do
       street_address         {'淀川区西中島３丁目２−１'}
       building_name          {'ライフスイート西中島１０１'}
       tel_number             {'09011223344'}
-      item_id                {1}
-      user_id                {1}
       token                  {"tok_abcdefghijk00000000000000000"}
   end
 end
