@@ -26,6 +26,10 @@ def edit
   unless current_user.id == @item.user_id
    redirect_to root_path
   end
+  
+  if Order.exists?(item_id: @item) && @item.user_id == current_user.id
+    redirect_to root_path
+  end
 end
 
 def update
