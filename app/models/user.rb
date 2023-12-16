@@ -4,6 +4,18 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   
+  def self.guest
+    find_or_create_by!(email: 'guest@example.com') do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.nickname = "ゲスト" 
+      user.last_name = "フリマ"
+      user.first_name = "タロウ"
+      user.last_name_kana = "フリマ" 
+      user.first_name_kana = "タロウ" 
+      user.birth_day = "1999-09-09"
+    end
+  end
+
   VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
   validates :password, format: { with: VALID_PASSWORD_REGEX }
   
